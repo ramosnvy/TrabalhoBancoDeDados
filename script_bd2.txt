@@ -1,9 +1,19 @@
+CREATE TABLE tb_pessoas(
+pe_codigo BIGINT NOT NULL PRIMARY KEY,
+pe_nome varchar(45),
+pe_senha varchar(50),
+pe_cpf varchar(50)
+)
+
+CREATE TABLE tb_cliente(
+cli_codigo BIGINT NOT NULL PRIMARY KEY
+)
+
 CREATE TABLE tb_funcionarios (
 fun_codigo BIGINT NOT NULL PRIMARY KEY,
-fun_nome varchar(45),
-fun_cpf varchar(45),
-fun_senha varchar(50),
-fun_funcao varchar(50)
+pe_codigo BIGINT NOT NULL,
+fun_funcao varchar(50),
+FOREIGN KEY (pe_codigo) REFERENCES tb_pessoas (pe_codigo)
 )
 
 CREATE TABLE tb_vendas(
