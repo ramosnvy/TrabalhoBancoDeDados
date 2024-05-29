@@ -1,0 +1,39 @@
+CREATE TABLE tb_funcionarios (
+fun_codigo BIGINT NOT NULL PRIMARY KEY,
+fun_nome varchar(45),
+fun_cpf varchar(45),
+fun_senha varchar(50),
+fun_funcao varchar(50)
+)
+
+CREATE TABLE tb_vendas(
+ven_codigo BIGINT NOT NULL PRIMARY KEY,
+ven_horario TIMESTAMP DEFAULT NOW(),
+ven_valor_total DECIMAL(7,2),
+fun_codigo BIGINT NOT NULL,
+FOREIGN KEY (fun_codigo) REFERENCES tb_funcionarios (fun_codigo)
+)
+
+CREATE TABLE tb_itens (
+ite_codigo BIGINT NOT NULL PRIMARY KEY,
+ite_quantidade INT,
+ite_valor_parcial DECIMAL(7,2),
+pro_codigo BIGINT NOT NULL,
+ven_codigo BIGINT NOT NULL,
+FOREIGN KEY (pro_codigo) REFERENCES tb_produtos (pro_codigo),
+FOREIGN KEY (ven_codigo) REFERENCES tb_vendas (ven_codigo)
+)
+
+CREATE TABLE tb_fornecedores(
+for_codigo BIGINT NOT NULL PRIMARY KEY,
+for_descricao varchar(45)
+)
+
+CREATE TABLE tb_produtos(
+pro_codigo BIGINT NOT NULL PRIMARY KEY,
+pro_descricao VARCHAR(50),
+pro_valor DECIMAL(7,2),
+pro_quantidade INT,
+for_codigo BIGINT NOT NULL,
+FOREIGN KEY (for_codigo) REFERENCES tb_fornecedores (for_codigo)
+)
