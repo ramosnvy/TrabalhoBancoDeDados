@@ -6,8 +6,11 @@ pe_cpf varchar(50)
 )
 
 CREATE TABLE tb_cliente(
-cli_codigo BIGINT NOT NULL PRIMARY KEY
+cli_codigo BIGINT NOT NULL PRIMARY KEY,
+pe_codigo BIGINT NOT NULL,
+FOREIGN KEY (pe_codigo) REFERENCES tb_pessoas (pe_codigo)
 )
+
 
 CREATE TABLE tb_funcionarios (
 fun_codigo BIGINT NOT NULL PRIMARY KEY,
