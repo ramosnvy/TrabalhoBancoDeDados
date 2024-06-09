@@ -1,23 +1,24 @@
 <?php
 
-namespace Model;
+namespace Pedro\TrabalhoBancoDeDados\Model;
+
+use PgSql\Connection;
 
 class Venda
 {
     public Int $ven_codigo;
-    public \DateTime $ven_horario;
-    public Double $ven_valor_total;
+    public String $ven_horario;
+    public float $ven_valor_total;
     public Int $fun_codigo;
 
     /**
      * @param Int $ven_codigo
-     * @param \DateTime $ven_horario
+     * @param String $ven_horario
      * @param float $ven_valor_total
      * @param Int $fun_codigo
      */
-    public function __construct(int $ven_codigo, \DateTime $ven_horario, float $ven_valor_total, int $fun_codigo)
+    public function __construct(String $ven_horario, float $ven_valor_total, int $fun_codigo)
     {
-        $this->ven_codigo = $ven_codigo;
         $this->ven_horario = $ven_horario;
         $this->ven_valor_total = $ven_valor_total;
         $this->fun_codigo = $fun_codigo;
@@ -33,7 +34,7 @@ class Venda
         return $this->ven_horario;
     }
 
-    public function setVenHorario(\DateTime $ven_horario): void
+    public function setVenHorario(String $ven_horario): void
     {
         $this->ven_horario = $ven_horario;
     }
@@ -53,4 +54,18 @@ class Venda
         return $this->fun_codigo;
     }
 
+    public function salvarVenda(Venda $venda, Connection $conexao)
+    {
+        $query = "INSERT INTO tb_vendas (ven_horario, ven_valor_total, fun_codigo) VALUES ('$this->ven_horario', '$this->ven_valor_total', '$this->fun_codigo')";
+
+        $retorno = pg_query($conexao, $query);
+
+        if ($retorno) {
+            echo "Venda salva com sucesso.";
+        } else {
+            echo "Erro ao salvar Venda.";
+        }
+
+        pg_close($conexao);
+    }
 }

@@ -2,7 +2,8 @@ CREATE TABLE tb_pessoas(
 pe_codigo BIGINT NOT NULL PRIMARY KEY,
 pe_nome varchar(45),
 pe_senha varchar(50),
-pe_cpf varchar(50)
+pe_cpf varchar(50),
+pe_flagfuncionario varchar(1)
 )
 
 CREATE TABLE tb_cliente(
@@ -50,3 +51,19 @@ pro_quantidade INT,
 for_codigo BIGINT NOT NULL,
 FOREIGN KEY (for_codigo) REFERENCES tb_fornecedores (for_codigo)
 )
+
+-- SEQ's
+CREATE SEQUENCE seq_pe_codigo;
+
+ALTER TABLE tb_pessoas
+    ALTER COLUMN pe_codigo SET DEFAULT nextval('seq_pe_codigo');
+
+CREATE SEQUENCE seq_ven_codigo;
+
+ALTER TABLE tb_vendas
+    ALTER COLUMN ven_codigo SET DEFAULT nextval('seq_ven_codigo');
+
+CREATE SEQUENCE seq_fun_codigo;
+
+ALTER TABLE tb_funcionarios
+    ALTER COLUMN fun_codigo SET DEFAULT nextval('seq_fun_codigo');

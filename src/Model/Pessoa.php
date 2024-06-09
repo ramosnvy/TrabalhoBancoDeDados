@@ -1,6 +1,8 @@
 <?php
 
-namespace Model;
+namespace Pedro\TrabalhoBancoDeDados\Model;
+
+use PgSql\Connection;
 
 class Pessoa
 {
@@ -12,14 +14,12 @@ class Pessoa
     public String $pe_flagfuncionario;
 
     /**
-     * @param Int $pe_codigo
      * @param String $pe_nome
      * @param String $pe_senha
      * @param String $pe_cpf
      */
-    public function __construct(int $pe_codigo, string $pe_nome, string $pe_senha, string $pe_cpf, string $pe_flagfuncionario)
+    public function __construct( string $pe_nome, string $pe_senha, string $pe_cpf, string $pe_flagfuncionario)
     {
-        $this->pe_codigo = $pe_codigo;
         $this->pe_nome = $pe_nome;
         $this->pe_senha = $pe_senha;
         $this->pe_cpf = $pe_cpf;
@@ -76,10 +76,18 @@ class Pessoa
         $this->pe_flagfuncionario = $pe_flagfuncionario;
     }
 
-    public function salvarPessoa(Pessoa $pessoa)
+    public function salvarPessoa(Pessoa $pessoa, Connection $conexao): void
     {
-        
+        $query = "INSERT INTO tb_pessoas (pe_nome, pe_senha, pe_cpf, pe_flagfuncionario) VALUES ('$this->pe_nome', '$this->pe_senha', '$this->pe_cpf', '$this->pe_flagfuncionario')";
+
+        $retorno = pg_query($conexao, $query);
+
+        if ($retorno) {
+            echo "Pessoa salva com sucesso.";
+        } else {
+            echo "Erro ao salvar pessoa.";
+        }
+
+        pg_close($conexao);
     }
-
-
 }

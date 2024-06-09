@@ -1,11 +1,10 @@
 <?php
 
-namespace Controller;
+namespace Pedro\TrabalhoBancoDeDados\Controller;
 
-require_once '\bd\TrabalhoBancoDeDados\src\Model\DB.php';
-
-use Model\DB;
-use Model\Pessoa;
+use Pedro\TrabalhoBancoDeDados\Model\DB;
+use Pedro\TrabalhoBancoDeDados\Model\Pessoa;
+use PgSql\Connection;
 
 class PessoaController
 {
@@ -16,25 +15,9 @@ class PessoaController
 
     public String $pe_flagfuncionario;
 
-    public function criarPessoa(String $pe_nome, String $pe_senha, String $pe_cpf, String $pe_flagfuncionario)
+    public function criarPessoa(Connection $conexao)
     {
-        $PessoaCtlr = new Pessoa();
-
-        $PessoaCtlr ->pe_nome = $pe_nome;
-        $PessoaCtlr->pe_senha = $pe_senha;
-        $PessoaCtlr ->pe_cpf = $pe_cpf;
-        $PessoaCtlr->pe_flagfuncionario = $pe_flagfuncionario;
-
-        $conexao = new DB();
-
-        $conexao->criarConexao();
+        $PessoaCtlr = new Pessoa($this->pe_nome,$this->pe_senha,$this->pe_cpf, $this->pe_flagfuncionario  );
+        $PessoaCtlr->salvarPessoa($PessoaCtlr, $conexao);
     }
-
-    public function criarPessoa2()
-    {
-        $conexao = new DB();
-
-        $conexao->criarConexao();
-    }
-
 }

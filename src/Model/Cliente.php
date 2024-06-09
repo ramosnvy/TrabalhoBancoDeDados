@@ -1,6 +1,6 @@
 <?php
 
-namespace Model;
+namespace Pedro\TrabalhoBancoDeDados\Model;
 
 use Model\Pessoa;
 
