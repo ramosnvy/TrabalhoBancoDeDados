@@ -1,8 +1,10 @@
 <?php
 
+use Pedro\TrabalhoBancoDeDados\Controller\FuncionarioController;
 use Pedro\TrabalhoBancoDeDados\Controller\PessoaController;
 use Pedro\TrabalhoBancoDeDados\Controller\VendaController;
 use Pedro\TrabalhoBancoDeDados\Model\DB;
+use Pedro\TrabalhoBancoDeDados\Model\Funcionario;
 
 require_once "../../vendor/autoload.php";
 
@@ -16,10 +18,11 @@ $db = new DB();
 $conexao = $db->criarConexao();
 //$pessoa->criarPessoa($conexao);
 
-
-
 $venda = new VendaController();
 $venda->fun_codigo = 1;
 $venda->ven_horario = "20-02-2023";
 $venda->ven_valor_total = 10.00;
-$venda->criarVenda($conexao);
+//$venda->criarVenda($conexao);
+
+$funcionario = new FuncionarioController();
+$funcionario->fun_codigo = 1;
