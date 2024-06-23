@@ -39,7 +39,7 @@ $routes = [
         'controller' => DashboardController::class . '@indexSistema'
     ],
     '/dashboard/sistema/gerarbackup' => [
-        'method' => 'POST',
+        'method' => 'GET',
         'controller' => DashboardController::class . '@gerarBackup'
     ],
     '/dashboard/cadastrar/pessoa' => [

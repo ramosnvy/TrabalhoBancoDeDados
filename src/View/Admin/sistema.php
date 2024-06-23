@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-md-6 offset-md-3">
             <div class="d-grid gap-2">
-                <button type="button" class="btn btn-primary btn-lg" id="btnBackup" onclick="gerarBackup()">Gerar Backup do Banco de Dados</button>
+                <button  type="button" class="btn btn-primary btn-lg" id="btnBackup" onclick="gerarBackup()">Gerar Backup do Banco de Dados</button>
             </div>
         </div>
     </div>
