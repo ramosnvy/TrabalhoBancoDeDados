@@ -29,3 +29,39 @@ RETURN EXISTS (
 );
 END;
 $$ LANGUAGE plpgsql;
+
+
+
+CREATE OR REPLACE FUNCTION inserir_venda(
+    p_ven_valor_total NUMERIC,
+    p_fun_codigo BIGINT,
+    p_pe_codigo BIGINT
+) RETURNS VOID AS $$
+BEGIN
+INSERT INTO tb_vendas (ven_valor_total, fun_codigo, pe_codigo)
+VALUES (p_ven_valor_total, p_fun_codigo, p_pe_codigo);
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION cadastrar_fornecedor(for_descricao TEXT)
+RETURNS VOID AS $$
+BEGIN
+INSERT INTO tb_fornecedores (for_descricao)
+VALUES (for_descricao);
+END;
+$$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION cadastrar_produto(
+    pro_descricao TEXT,
+    pro_valor NUMERIC,
+    pro_quantidade INTEGER,
+    for_codigo INTEGER
+) RETURNS VOID AS $$
+BEGIN
+INSERT INTO tb_produtos (pro_descricao, pro_valor, pro_quantidade, for_codigo)
+VALUES (pro_descricao, pro_valor, pro_quantidade, for_codigo);
+END;
+$$ LANGUAGE plpgsql;
+

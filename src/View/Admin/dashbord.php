@@ -8,8 +8,8 @@
         <div class="col-md-12 d-flex justify-content-between">
             <a href="/dashboard/cadastrar/pessoa" class="btn btn-primary flex-fill me-2">Cadastro de Pessoa</a>
             <a href="/dashboard/registrar/venda" class="btn btn-primary flex-fill me-2">Registro de Venda</a>
-            <a href="#" class="btn btn-primary flex-fill me-2">Cadastro de Fornecedore</a>
-            <a href="#" class="btn btn-primary flex-fill">Cadastro de Mercadorias</a>
+            <a href="/dashboard/cadastrar/fornecedor" class="btn btn-primary flex-fill me-2">Cadastro de Fornecedores</a>
+            <a href="/dashboard/cadastrar/mercadoria" class="btn btn-primary flex-fill">Cadastro de Mercadorias</a>
         </div>
     </div>
     <!-- Fim dos Botões de Cadastro -->

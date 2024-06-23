@@ -3,6 +3,7 @@
 namespace Pedro\TrabalhoBancoDeDados\Controller;
 
 use Pedro\TrabalhoBancoDeDados\Model\Funcionario;
+use PgSql\Connection;
 
 class FuncionarioController
 {
@@ -10,9 +11,21 @@ class FuncionarioController
     public Int $pe_codigo;
     public String $fun_funcao;
 
-    public function criarFuncionario(Connection $connection)
+    public Connection $conexao;
+
+    public function __construct(Connection $conexao)
     {
-        $FuncionarioCtrl = new Funcionario($this->fun_codigo, $this->pe_codigo, $this->fun_funcao);
-        $FuncionarioCtrl->salvarFuncionario($FuncionarioCtrl, $connection);
+        $this->conexao = $conexao;
+    }
+    public function getFuncionarios(): array
+    {
+        $result = pg_query($this->conexao, "SELECT * FROM vw_funcionarios");
+        $funcionarios = [];
+
+        while ($row = pg_fetch_assoc($result)) {
+            $funcionarios[] = $row;
+        }
+
+        return $funcionarios;
     }
 }

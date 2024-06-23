@@ -21,7 +21,13 @@ class PessoaController
         $this->conexao = $conexao; // Passa a conexão para o UsuarioModel
 
     }
-    public function cadastrarPessoa()
+    public function indexCadastrarPessoa(){
+        require_once __DIR__ . '/../view/header.php';
+        require_once __DIR__ . '/../view/admin/cadastrar-pessoa.php';
+        require_once __DIR__ . '/../view/footer.php';
+    }
+
+    public function salvarPessoa()
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->pe_nome = $_POST['nome'];

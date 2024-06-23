@@ -43,18 +43,4 @@ class Funcionario extends Pessoa
         $this->fun_funcao = $fun_funcao;
     }
 
-    public function salvarFuncionario(Funcionario $funcionario, Connection $conexao)
-    {
-        $query = "INSERT INTO tb_funcionarios (fun_codigo, pe_codigo, fun_funcao) VALUES ('$this->fun_codigo', '$this->pe_codigo', '$this->fun_funcao')";
-
-        $retorno = pg_query($conexao, $query);
-
-        if ($retorno) {
-            echo "Funcionario salva com sucesso.";
-        } else {
-            echo "Erro ao salvar Funcionario.";
-        }
-
-        pg_close($conexao);
-    }
 }

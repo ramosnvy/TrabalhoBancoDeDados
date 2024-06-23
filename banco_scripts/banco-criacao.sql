@@ -29,6 +29,9 @@ fun_codigo BIGINT NOT NULL,
 FOREIGN KEY (fun_codigo) REFERENCES tb_funcionarios (fun_codigo)
 )
 
+ALTER TABLE tb_vendas ADD COLUMN pe_codigo BIGINT REFERENCES tb_pessoas (pe_codigo);
+
+
 CREATE TABLE tb_itens (
 ite_codigo BIGINT NOT NULL PRIMARY KEY,
 ite_quantidade INT,
@@ -68,3 +71,13 @@ CREATE SEQUENCE seq_fun_codigo;
 
 ALTER TABLE tb_funcionarios
     ALTER COLUMN fun_codigo SET DEFAULT nextval('seq_fun_codigo');
+
+CREATE SEQUENCE seq_pro_codigo;
+
+ALTER TABLE tb_produtos
+    ALTER COLUMN pro_codigo SET DEFAULT nextval('seq_pro_codigo');
+
+CREATE SEQUENCE seq_for_codigo;
+
+ALTER TABLE tb_fornecedores
+    ALTER COLUMN for_codigo SET DEFAULT nextval('seq_for_codigo');

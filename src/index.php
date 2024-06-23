@@ -2,9 +2,11 @@
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
+use Pedro\TrabalhoBancoDeDados\Controller\FornecedorController;
 use Pedro\TrabalhoBancoDeDados\Controller\LoginController;
 use Pedro\TrabalhoBancoDeDados\Controller\DashboardController;
 use Pedro\TrabalhoBancoDeDados\Controller\PessoaController;
+use Pedro\TrabalhoBancoDeDados\Controller\ProdutoController;
 use Pedro\TrabalhoBancoDeDados\Controller\VendaController;
 use Pedro\TrabalhoBancoDeDados\Model\DB;
 
@@ -42,17 +44,33 @@ $routes = [
     ],
     '/dashboard/cadastrar/pessoa' => [
         'method' => 'GET',
-        'controller' => DashboardController::class . '@indexCadastrarPessoa'
+            'controller' => PessoaController::class . '@indexCadastrarPessoa'
     ],
     '/dashboard/cadastrar/pessoa/salvar' => [
         'method' => 'POST',
-        'controller' => PessoaController::class . '@cadastrarPessoa'
+        'controller' => PessoaController::class . '@salvarPessoa'
     ],'/dashboard/registrar/venda' => [
         'method' => 'GET',
         'controller' => VendaController::class . '@indexRegistrarVenda'
+    ],'/dashboard/registrar/venda/salvar' => [
+        'method' => 'POST',
+        'controller' => VendaController::class . '@salvarVenda'
+    ],'/dashboard/cadastrar/fornecedor' => [
+        'method' => 'GET',
+        'controller' => FornecedorController::class . '@indexCadastrarFornecedor'
+    ],
+    '/dashboard/cadastrar/fornecedor/salvar' => [
+        'method' => 'POST',
+        'controller' => FornecedorController::class . '@salvarFornecedor'
+    ],'/dashboard/cadastrar/mercadoria' => [
+        'method' => 'GET',
+        'controller' => ProdutoController::class . '@indexCadastrarProduto'
+    ],
+    '/dashboard/cadastrar/produto/salvar' => [
+        'method' => 'POST',
+        'controller' => ProdutoController::class . '@salvarProduto'
     ],
 
-    // ... adicione mais rotas aqui ...
 ];
 
 // Encontra a Rota Correspondente (incluindo método)
