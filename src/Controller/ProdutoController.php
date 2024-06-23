@@ -62,7 +62,7 @@ class ProdutoController
         if($Produto->salvarProduto()){
             session_start();
             $_SESSION['alerta'] = "Produto cadastrado com sucesso!";
-            header("Location: /dashboard/cadastrar/mercadoria");
+            header("Location: /admin/dashboard/cadastrar/mercadoria");
             exit();
         }
     }

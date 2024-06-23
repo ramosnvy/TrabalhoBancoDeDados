@@ -1,4 +1,3 @@
-
 <!-- Conteúdo da página -->
 <div class="container mt-4">
     <h2 class="text-center mb-4">Dashboard</h2>
@@ -6,42 +5,34 @@
     <!-- Botões de Cadastro -->
     <div class="row mb-4">
         <div class="col-md-12 d-flex justify-content-between">
-            <a href="/dashboard/cadastrar/pessoa" class="btn btn-primary flex-fill me-2">Cadastro de Pessoa</a>
-            <a href="/dashboard/registrar/venda" class="btn btn-primary flex-fill me-2">Registro de Venda</a>
-            <a href="/dashboard/cadastrar/fornecedor" class="btn btn-primary flex-fill me-2">Cadastro de Fornecedores</a>
-            <a href="/dashboard/cadastrar/mercadoria" class="btn btn-primary flex-fill">Cadastro de Mercadorias</a>
+            <a href="/admin/dashboard/cadastrar/pessoa" class="btn btn-primary flex-fill me-2">Cadastro de Pessoa</a>
+            <a href="/admin/dashboard/registrar/venda" class="btn btn-primary flex-fill me-2">Registro de Venda</a>
+            <a href="/admin/dashboard/cadastrar/fornecedor" class="btn btn-primary flex-fill me-2">Cadastro de Fornecedores</a>
+            <a href="/admin/dashboard/cadastrar/produto" class="btn btn-primary flex-fill">Cadastro de Mercadorias</a>
         </div>
     </div>
     <!-- Fim dos Botões de Cadastro -->
 
     <!-- Cards de Informações -->
     <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Vendas Mensais</h5>
-                    <p class="card-text">Total de vendas no mês: 100</p>
+                    <h5 class="card-title">Vendas (30 dias)</h5>
+                    <p class="card-text">Total de vendas: <?=$vendaInfo[0]["qtdvendas"]; ?></p>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
+        <div class="col-md-6">
             <div class="card mb-4">
                 <div class="card-body">
-                    <h5 class="card-title">Clientes Ativos</h5>
-                    <p class="card-text">Total de clientes ativos: 50</p>
+                    <h5 class="card-title">Clientes</h5>
+                    <p class="card-text">Total de clientes: <?=$clienteInfo[0]["qtdclientes"]; ?></p>
                 </div>
             </div>
         </div>
 
-        <div class="col-md-4">
-            <div class="card mb-4">
-                <div class="card-body">
-                    <h5 class="card-title">Pedidos Pendentes</h5>
-                    <p class="card-text">Total de pedidos pendentes: 10</p>
-                </div>
-            </div>
-        </div>
         <!-- Fim dos Cards de Informações -->
     </div>
 
@@ -55,16 +46,12 @@
                 <th scope="col">Valor Total</th>
                 <th scope="col">Cliente</th>
                 <th scope="col">Funcionário Responsável</th>
-                <th scope="col">Ações</th>
             </tr>
             </thead>
             <tbody>
             <?php
             // Dados de exemplo (substitua por seus dados reais)
-            $dadosVendas = array(
-
-                array('015', '10:20', 'R$ 580,00', 'Cliente O', 'Funcionário L')
-            );
+            $dadosVendas = $vendasRecentes;
 
             // Parâmetros da paginação
             $itensPorPagina = 10;
@@ -75,14 +62,12 @@
             // Exibir os itens da página atual
             for ($i = $inicio; $i < min($inicio + $itensPorPagina, count($dadosVendas)); $i++) {
                 echo '<tr>';
-                echo '<td>' . $dadosVendas[$i][0] . '</td>';
-                echo '<td>' . $dadosVendas[$i][1] . '</td>';
-                echo '<td>' . $dadosVendas[$i][2] . '</td>';
-                echo '<td>' . $dadosVendas[$i][3] . '</td>';
-                echo '<td>' . $dadosVendas[$i][4] . '</td>';
+                echo '<td>' . $dadosVendas[$i]['ven_codigo'] . '</td>';
+                echo '<td>' . $dadosVendas[$i]['ven_horario'] . '</td>';
+                echo '<td>' . $dadosVendas[$i]['ven_valor_total'] . '</td>';
+                echo '<td>' . $dadosVendas[$i]['nome_funcionario'] . '</td>';
+                echo '<td>' . $dadosVendas[$i]['nome_cliente'] . '</td>';
                 echo '<td>';
-                echo '<button class="btn btn-danger btn-sm">Excluir</button>';
-                echo '<button class="btn btn-info btn-sm ms-1">Detalhes</button>';
                 echo '</td>';
                 echo '</tr>';
             }

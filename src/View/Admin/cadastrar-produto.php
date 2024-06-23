@@ -1,7 +1,7 @@
 <div class="container mt-4">
     <h2>Cadastro de Mercadoria</h2>
 
-    <form method="POST" action="/dashboard/cadastrar/produto/salvar">
+    <form method="POST" action="/admin/dashboard/cadastrar/produto/salvar">
         <div class="mb-3">
             <label for="fornecedor" class="form-label">Fornecedor:</label>
             <select class="form-select" id="fornecedor" name="fornecedor" required>

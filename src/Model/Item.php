@@ -2,13 +2,17 @@
 
 namespace Pedro\TrabalhoBancoDeDados\Model;
 
+use PgSql\Connection;
+
 class Item
 {
     public Int $ite_codigo;
     public Int $ite_quantidade;
-    public Double $ite_valor_parcial;
+    public float $ite_valor_parcial;
     public Int $pro_codigo;
     public Int $ven_codigo;
+
+    public Connection $conexao;
 
     /**
      * @param Int $ite_codigo
@@ -17,13 +21,13 @@ class Item
      * @param Int $pro_codigo
      * @param Int $ven_codigo
      */
-    public function __construct(int $ite_codigo, int $ite_quantidade, float $ite_valor_parcial, int $pro_codigo, int $ven_codigo)
+    public function __construct(int $ite_quantidade, float $ite_valor_parcial, int $pro_codigo, int $ven_codigo, Connection $conexao)
     {
-        $this->ite_codigo = $ite_codigo;
         $this->ite_quantidade = $ite_quantidade;
         $this->ite_valor_parcial = $ite_valor_parcial;
         $this->pro_codigo = $pro_codigo;
         $this->ven_codigo = $ven_codigo;
+        $this->conexao = $conexao;
     }
 
     public function getIteCodigo(): int
@@ -66,5 +70,19 @@ class Item
         return $this->ven_codigo;
     }
 
+    public function registrarItem(): bool
+    {
+        $result = pg_query_params($this->conexao,
+            "SELECT inserir_item($1::integer, $2::numeric, $3::integer, $4::integer)",
+            array($this->ite_quantidade, $this->ite_valor_parcial, $this->pro_codigo, $this->ven_codigo)
+        );
+
+        if ($result && pg_num_rows($result) > 0) {
+            return true;
+        } else {
+            return false;
+        }
+        return false;
+    }
 
 }

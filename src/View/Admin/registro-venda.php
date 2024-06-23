@@ -1,7 +1,7 @@
 <div class="container mt-4">
     <h2>Registro de Venda</h2>
 
-    <form method="POST" action="/dashboard/registrar/venda/salvar">
+    <form method="POST" action="/admin/dashboard/registrar/venda/salvar">
         <div class="mb-3">
             <label for="valorTotal" class="form-label">Valor Total:</label>
             <input type="number" class="form-control" value="valorTotal" id="valorTotal" name="valorTotal" required>
@@ -32,25 +32,27 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <td>
-                    <select class="form-select" id="pro_descricao" name="pro_descricao" required>
-                        <?php foreach ($produtos as $produto) : ?>
-                            <option value="<?= $produto['pro_codigo'] ?>"><?= $produto['pro_descricao'] ?></option>
-                        <?php endforeach; ?>
-                    </select>
-                </td>
-
-                <?php foreach ($produtos as $produto) : ?>
+            <?php if (!empty($produtos)): ?>
+                <tr>
                     <td>
-                        <input type="hidden" value="<?= $produto['pro_quantidade'] ?>">
-                        <input id="quantidade" type="number" name="pro_quantidade" value="<?= $produto['pro_quantidade'] ?>" class="form-control quantidade-produto">
+                        <select class="form-select" id="pro_descricao" name="pro_descricao" required>
+                            <?php foreach ($produtos as $produtoInterno): ?>
+                                <option value="<?= $produtoInterno['pro_descricao'] ?>" <?= ($produtoInterno['pro_descricao'] == $produtos[0]['pro_descricao']) ? 'selected' : '' ?>>
+                                    <?= $produtoInterno['pro_descricao'] ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
                     </td>
-                    <td><input type="number" name="valor_unitario" value="<?= $produto['pro_valor'] ?>" class="form-control" readonly></td>
-                    <td><input type="number" name="valor_total_mercadoria" value="<?= $produto['pro_quantidade'] * $produto['pro_valor'] ?>" class="form-control" readonly></td>
-                    <td><button type="button" class="btn btn-danger">Remover</button></td>
-                <?php endforeach; ?>
-            </tr>
+                    <td>
+                        <input type="hidden" name="pro_codigo" value="<?= $produtos[0]['pro_codigo'] ?>">
+                        <input type="hidden" name="pro_quantidade_original" value="<?= $produtos[0]['pro_quantidade'] ?>">
+                        <input id="quantidade" type="number" name="pro_quantidade" value="<?= $produtos[0]['pro_quantidade'] ?>" class="form-control quantidade-produto">
+                    </td>
+                    <td><input type="number" name="pro_valor_unitario" value="<?= $produtos[0]['pro_valor'] ?>" class="form-control" readonly></td>
+                    <td><input type="number" name="valor_total_mercadoria" value="<?= $produtos[0]['pro_quantidade'] * $produtos[0]['pro_valor'] ?>" class="form-control" readonly></td>
+                    <td><button type="button" class="btn btn-danger remover-produto">Remover</button></td>
+                </tr>
+            <?php endif; ?>
 
             </tbody>
         </table>

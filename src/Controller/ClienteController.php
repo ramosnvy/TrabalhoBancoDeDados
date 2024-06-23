@@ -27,5 +27,17 @@ class ClienteController
         return $clientes;
     }
 
+    public function getClienteInfoQtd(): array
+    {
+        $result = pg_query($this->conexao, "SELECT COUNT(*) as qtdclientes FROM vw_clientes");
+        $clientesInfoQtd = [];
+
+        while ($row = pg_fetch_assoc($result)) {
+            $clientesInfoQtd[] = $row;
+        }
+
+        return $clientesInfoQtd;
+    }
+
 
 }

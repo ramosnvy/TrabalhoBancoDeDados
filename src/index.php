@@ -11,7 +11,8 @@ use Pedro\TrabalhoBancoDeDados\Controller\VendaController;
 use Pedro\TrabalhoBancoDeDados\Model\DB;
 
 $db = new DB();
-$conexao = $db->criarConexao();
+$adminConexao = $db->criarConexaoAdmin();
+$clienteConexao = $db->criarConexaoCliente();
 
 // Mapeamento de Wildcards
 $wildcards = [
@@ -22,53 +23,61 @@ $wildcards = [
 
 // Rotas e seus Controladores Associados (com métodos)
 $routes = [
-    '/login' => [
+    '/admin/login' => [
         'method' => 'GET',
-        'controller' => LoginController::class . '@index'
+        'controller' => LoginController::class . '@indexAdmin'
     ],
     '/login/autenticar' => [
         'method' => 'POST',
         'controller' => LoginController::class . '@autenticar'
     ],
-    '/dashboard' => [
+    '/login' => [
+        'method' => 'GET',
+        'controller' => LoginController::class . '@indexCliente'
+    ],
+
+    '/admin/dashboard' => [
         'method' => 'GET',
         'controller' => DashboardController::class . '@index'
     ],
-    '/dashboard/sistema' => [
+    '/admin/dashboard/sistema' => [
         'method' => 'GET',
         'controller' => DashboardController::class . '@indexSistema'
     ],
-    '/dashboard/sistema/gerarbackup' => [
+    '/admin/dashboard/sistema/gerarbackup' => [
         'method' => 'GET',
         'controller' => DashboardController::class . '@gerarBackup'
     ],
-    '/dashboard/cadastrar/pessoa' => [
+    '/admin/dashboard/cadastrar/pessoa' => [
         'method' => 'GET',
             'controller' => PessoaController::class . '@indexCadastrarPessoa'
     ],
-    '/dashboard/cadastrar/pessoa/salvar' => [
+    '/admin/dashboard/cadastrar/pessoa/salvar' => [
         'method' => 'POST',
         'controller' => PessoaController::class . '@salvarPessoa'
-    ],'/dashboard/registrar/venda' => [
+    ],'/admin/dashboard/registrar/venda' => [
         'method' => 'GET',
         'controller' => VendaController::class . '@indexRegistrarVenda'
-    ],'/dashboard/registrar/venda/salvar' => [
+    ],'/admin/dashboard/registrar/venda/salvar' => [
         'method' => 'POST',
         'controller' => VendaController::class . '@salvarVenda'
-    ],'/dashboard/cadastrar/fornecedor' => [
+    ],'/admin/dashboard/cadastrar/fornecedor' => [
         'method' => 'GET',
         'controller' => FornecedorController::class . '@indexCadastrarFornecedor'
     ],
-    '/dashboard/cadastrar/fornecedor/salvar' => [
+    '/admin/dashboard/cadastrar/fornecedor/salvar' => [
         'method' => 'POST',
         'controller' => FornecedorController::class . '@salvarFornecedor'
-    ],'/dashboard/cadastrar/mercadoria' => [
+    ],'/admin/dashboard/cadastrar/produto' => [
         'method' => 'GET',
         'controller' => ProdutoController::class . '@indexCadastrarProduto'
     ],
-    '/dashboard/cadastrar/produto/salvar' => [
+    '/admin/dashboard/cadastrar/produto/salvar' => [
         'method' => 'POST',
         'controller' => ProdutoController::class . '@salvarProduto'
+    ],'/admin/sair' => [
+        'method' => 'GET',
+        'controller' => LoginController::class . '@sair'
     ],
 
 ];
@@ -103,7 +112,13 @@ foreach ($arrayDiff as $index => $uri) {
 }
 
 if ($routeFound) {
-    // Instancia o controlador, injetando a conexão como parâmetro
+    // Verifica se a rota começa com '/admin'
+    $isAdminRoute = str_starts_with($requestUri, '/admin');
+
+    // Escolhe a conexão correta
+    $conexao = $isAdminRoute ? $adminConexao : $clienteConexao;
+
+    // Instancia o controlador, injetando a conexão escolhida
     $controller = new $controllerName($conexao);
 
     // Chama o método do controlador com os parâmetros

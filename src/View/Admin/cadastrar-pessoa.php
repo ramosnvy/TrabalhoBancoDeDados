@@ -1,7 +1,7 @@
 <div class="container mt-4">
     <h2>Cadastro de Pessoa</h2>
 
-    <form method="POST" action="/dashboard/cadastrar/pessoa/salvar">
+    <form method="POST" action="/admin/dashboard/cadastrar/pessoa/salvar">
         <div class="mb-3">
             <label for="nome" class="form-label">Nome:</label>
             <input type="text" class="form-control" id="nome" name="nome" required>

@@ -1,7 +1,7 @@
 <div class="container mt-4">
     <h2>Cadastro de Fornecedor</h2>
 
-    <form method="POST" action="/dashboard/cadastrar/fornecedor/salvar">
+    <form method="POST" action="/admin/dashboard/cadastrar/fornecedor/salvar">
         <div class="mb-3">
             <label for="nomeFornecedor" class="form-label">Nome do Fornecedor:</label>
             <input type="text" class="form-control" id="nomeFornecedor" name="nomeFornecedor" required>

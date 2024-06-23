@@ -69,10 +69,8 @@ class Venda
         return $this->fun_codigo;
     }
 
-    public function registrarVenda()
+    public function registrarVenda() :bool
     {
-        var_dump($this->ven_valor_total, $this->fun_codigo, $this->pe_codigo);
-
         $result = pg_query_params($this->conexao,
             "SELECT inserir_Venda($1::numeric, $2::bigint, $3::bigint)",
             array($this->ven_valor_total, $this->fun_codigo, $this->pe_codigo)
@@ -84,5 +82,18 @@ class Venda
             return false;
         }
         return false;
+    }
+
+    public function getUltimoCodigoVenda(): int
+    {
+        $result = pg_query_params($this->conexao, "select getUltimoIdVenda()", array());
+
+        if ($result && pg_num_rows($result) > 0) {
+            $row = pg_fetch_row($result);
+            $ultimoId = $row[0];
+            return $ultimoId;
+        } else {
+            return 0;
+        }
     }
 }

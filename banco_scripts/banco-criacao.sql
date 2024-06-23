@@ -81,3 +81,14 @@ CREATE SEQUENCE seq_for_codigo;
 
 ALTER TABLE tb_fornecedores
     ALTER COLUMN for_codigo SET DEFAULT nextval('seq_for_codigo');
+
+CREATE SEQUENCE seq_ite_codigo;
+
+ALTER TABLE tb_itens
+    ALTER COLUMN ite_codigo SET DEFAULT nextval('seq_ite_codigo');
+
+CREATE SEQUENCE seq_cli_codigo;
+
+ALTER TABLE tb_cliente
+    ALTER COLUMN cli_codigo SET DEFAULT nextval('seq_cli_codigo');
+

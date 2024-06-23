@@ -45,7 +45,7 @@ class FornecedorController
         if($fornecedorModel->salvarFornecedor()){
             session_start();
             $_SESSION['alerta'] = "Fornecedor cadastrado com sucesso!";
-            header("Location: /dashboard/cadastrar/fornecedor");
+            header("Location: /admin/dashboard/cadastrar/fornecedor");
             exit();
         }
     }

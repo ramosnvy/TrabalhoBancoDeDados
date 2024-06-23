@@ -42,7 +42,7 @@ class PessoaController
         if($PessoaCtlr->salvarPessoa()){
             session_start();
             $_SESSION['alerta'] = "Pessoa cadastrada com sucesso!";
-            header("Location: /dashboard/cadastrar/pessoa");
+            header("Location: /admin/dashboard/cadastrar/pessoa");
             exit();
         }
     }

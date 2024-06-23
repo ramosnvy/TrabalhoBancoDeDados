@@ -10,4 +10,6 @@ class ItemController
     public Int $pro_codigo;
     public Int $ven_codigo;
 
+
+
 }
