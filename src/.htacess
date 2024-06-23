@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /bd/TrabalhoBancoDeDados/src/
+
+# Redireciona /login para /view/login.php (sem admin/)
+RewriteRule ^login/?$ view/login.php [L]
+
+# Redireciona todas as outras requisições para o index.php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php?url=$1 [QSA,L]

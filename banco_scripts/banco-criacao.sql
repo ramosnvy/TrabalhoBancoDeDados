@@ -1,9 +1,10 @@
 CREATE TABLE tb_pessoas(
-pe_codigo BIGINT NOT NULL PRIMARY KEY,
-pe_nome varchar(45),
-pe_senha varchar(50),
-pe_cpf varchar(50),
-pe_flagfuncionario varchar(1)
+                           pe_codigo BIGINT NOT NULL PRIMARY KEY,
+                           pe_nome varchar(45),
+                           pe_senha varchar(50),
+                           pe_cpf varchar(50),
+                           pe_usuario varchar(45),
+                           pe_flagtipopessoa varchar(1)
 )
 
 CREATE TABLE tb_cliente(

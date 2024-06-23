@@ -10,20 +10,25 @@ class Pessoa
     public String $pe_nome;
     public String $pe_senha;
     public String $pe_cpf;
-
-    public String $pe_flagfuncionario;
-
+    public String $pe_flagpessoatipo;
+    public String $pe_usuario;
+    public Connection $conexao;
     /**
      * @param String $pe_nome
      * @param String $pe_senha
      * @param String $pe_cpf
+     * @param String $pe_flagpessoatipo
+     * @param String $pe_usuario
+     * @param Connection $conexao
      */
-    public function __construct( string $pe_nome, string $pe_senha, string $pe_cpf, string $pe_flagfuncionario)
+    public function __construct( string $pe_nome, string $pe_senha, string $pe_cpf, string $pe_flagpessoatipo, string $pe_usuario, Connection $conexao)
     {
         $this->pe_nome = $pe_nome;
         $this->pe_senha = $pe_senha;
         $this->pe_cpf = $pe_cpf;
-        $this->pe_flagfuncionario = $pe_flagfuncionario;
+        $this->pe_flagpessoatipo = $pe_flagpessoatipo;
+        $this->pe_usuario = $pe_usuario;
+        $this->conexao = $conexao;
     }
 
     public function getPeCodigo(): int
@@ -76,18 +81,17 @@ class Pessoa
         $this->pe_flagfuncionario = $pe_flagfuncionario;
     }
 
-    public function salvarPessoa(Pessoa $pessoa, Connection $conexao): void
+    public function salvarPessoa(): bool
     {
-        $query = "INSERT INTO tb_pessoas (pe_nome, pe_senha, pe_cpf, pe_flagfuncionario) VALUES ('$this->pe_nome', '$this->pe_senha', '$this->pe_cpf', '$this->pe_flagfuncionario')";
+        $result = pg_query_params($this->conexao, "SELECT cadastrar_pessoa($1, $2, $3, $4, $5)", array($this->pe_nome, $this->pe_senha, $this->pe_cpf,  $this->pe_usuario, $this->pe_flagpessoatipo ));
 
-        $retorno = pg_query($conexao, $query);
-
-        if ($retorno) {
-            echo "Pessoa salva com sucesso.";
+        if ($result && pg_num_rows($result) > 0) {
+            return true;
         } else {
-            echo "Erro ao salvar pessoa.";
+            return false;
         }
-
-        pg_close($conexao);
+        return false;
     }
+
+
 }

@@ -14,6 +14,13 @@ class VendaController
     public float $ven_valor_total;
     public Int $fun_codigo;
 
+    public function indexRegistrarVenda()
+    {
+            require_once __DIR__ . '/../view/header.php';
+            require_once __DIR__ . '/../view/admin/registro-venda.php';
+            require_once __DIR__ . '/../view/footer.php';
+    }
+
     public function criarVenda(Connection $connection)
     {
         $VendaCtrl = new Venda($this->ven_horario, $this->ven_valor_total, $this->fun_codigo);

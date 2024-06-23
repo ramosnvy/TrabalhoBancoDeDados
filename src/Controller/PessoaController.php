@@ -12,12 +12,32 @@ class PessoaController
     public String $pe_nome;
     public String $pe_senha;
     public String $pe_cpf;
+    public String $pe_usuario;
+    public String $pe_flagtipopessoa;
+    public $conexao;
 
-    public String $pe_flagfuncionario;
-
-    public function criarPessoa(Connection $conexao)
+    public function __construct($conexao)
     {
-        $PessoaCtlr = new Pessoa($this->pe_nome,$this->pe_senha,$this->pe_cpf, $this->pe_flagfuncionario  );
-        $PessoaCtlr->salvarPessoa($PessoaCtlr, $conexao);
+        $this->conexao = $conexao; // Passa a conexão para o UsuarioModel
+
+    }
+    public function cadastrarPessoa()
+    {
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $this->pe_nome = $_POST['nome'];
+            $this->pe_cpf = $_POST['cpf'];
+            $this->pe_flagtipopessoa = $_POST['tipo'];
+            $this->pe_usuario = $_POST['usuario'];
+            $this->pe_senha = $_POST['senha'];
+        }
+
+        $PessoaCtlr = new Pessoa($this->pe_nome,$this->pe_senha,$this->pe_cpf, $this->pe_flagtipopessoa, $this->pe_usuario, $this->conexao );
+
+        if($PessoaCtlr->salvarPessoa()){
+            session_start();
+            $_SESSION['alerta'] = "Pessoa cadastrada com sucesso!";
+            header("Location: /dashboard/cadastrar/pessoa");
+            exit();
+        }
     }
 }

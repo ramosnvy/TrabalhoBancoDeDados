@@ -15,8 +15,9 @@
             <div class="card card-login">
                 <div class="card-body">
                     <h3 class="card-title text-center mb-4">Login</h3>
-                    <!-- Formulário de login -->
-                    <form>
+
+                    <form method="POST" action="/login/autenticar">
+                        <input type="hidden" name="action" value="login">
                         <div class="mb-3">
                             <label for="username" class="form-label">Usuário</label>
                             <input type="text" class="form-control" id="username" name="username" required>
@@ -29,19 +30,18 @@
                             <button type="submit" class="btn btn-primary">Entrar</button>
                         </div>
                     </form>
-                    <!-- Fim do formulário de login -->
 
-                    <!-- Botão de redefinição de senha -->
                     <div class="text-center mt-3">
-                        <button class="btn btn-link">Esqueceu sua senha?</button>
+                        <a href="/recuperar-senha" class="btn btn-link">Esqueceu sua senha?</a>
                     </div>
-                    <!-- Fim do botão de redefinição de senha -->
 
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 
 <!-- JavaScript do Bootstrap (opcional para funcionalidades como validação de formulário) -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
