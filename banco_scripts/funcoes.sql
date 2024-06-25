@@ -74,10 +74,8 @@ SELECT ven_codigo INTO ultimo_id
 FROM tb_vendas
 ORDER BY ven_codigo DESC
     LIMIT 1;
-
--- Handle the case where there are no sales yet
 IF NOT FOUND THEN
-    RETURN 0;  -- Or any other default value that makes sense
+    RETURN 0;
 END IF;
 
 RETURN ultimo_id;
@@ -88,7 +86,7 @@ $$ LANGUAGE plpgsql;
 
 CREATE OR REPLACE FUNCTION inserir_item(
     p_ite_quantidade INTEGER,
-    p_ite_valor_parcial NUMERIC, -- Use NUMERIC for monetary values
+    p_ite_valor_parcial NUMERIC, 
     p_pro_codigo INTEGER,
     p_ven_codigo INTEGER
 ) RETURNS VOID AS $$
