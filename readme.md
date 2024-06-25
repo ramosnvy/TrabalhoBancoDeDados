@@ -1,6 +1,6 @@
 Login de Adm/vendedor e Login de cliente:
 ![WhatsApp Image 2024-06-19 at 13 01 50](https://github.com/ramosnvy/TrabalhoBancoDeDados/assets/79786430/03d62c09-6291-46ba-845d-df9ae7459ba5)
-![imagem_2024-06-25_194642212](https://github.com/ramosnvy/TrabalhoBancoDeDados/assets/79786430/0defe5a8-691e-40cc-ab45-93691166ceef)
+![imagem_2024-06-25_195419405](https://github.com/ramosnvy/TrabalhoBancoDeDados/assets/79786430/09e0a884-af7b-4342-b738-de9b99ce29ad)
 Dashboard:
 ![WhatsApp Image 2024-06-19 at 13 01 57](https://github.com/ramosnvy/TrabalhoBancoDeDados/assets/79786430/3237ae60-b022-4681-a924-90db5cf8cc90)
 Área de Backup:
